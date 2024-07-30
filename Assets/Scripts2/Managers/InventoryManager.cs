@@ -17,7 +17,7 @@ public class InventoryManager : MonoBehaviour
 
     public void AddRawMaterials(int amount)
     {
-        RawMaterials++;
+        RawMaterials += amount;
         OnRawMaterialsChanged?.Invoke(RawMaterials);
     }
 

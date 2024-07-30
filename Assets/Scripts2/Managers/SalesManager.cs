@@ -9,12 +9,18 @@ public class SalesManager : MonoBehaviour
     [SerializeField] private EmployeeManager employeeManager;
     [SerializeField] private float ProcessedMaterialsPrice = 26.37f;
 
-    public void SellProcessedMaterials()
+    public void SellProcessedMaterials(int amount)
     {
-        if (inventoryManager.ProcessedMaterials > 0)
+        if (inventoryManager.ProcessedMaterials > amount)
         {
-            inventoryManager.RemoveProcessedMaterials(1);
-            FinancialManager.AddFunds(ProcessedMaterialsPrice);
+            FinancialManager.AddFunds(ProcessedMaterialsPrice * amount);
+            inventoryManager.RemoveProcessedMaterials(amount);
         }
+    }
+
+    public void SellAllMaterials()
+    {
+        FinancialManager.AddFunds(ProcessedMaterialsPrice * inventoryManager.ProcessedMaterials);
+        inventoryManager.RemoveProcessedMaterials(inventoryManager.ProcessedMaterials);
     }
 }

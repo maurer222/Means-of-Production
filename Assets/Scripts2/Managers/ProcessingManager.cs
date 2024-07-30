@@ -11,13 +11,20 @@ public class ProcessingManager : MonoBehaviour
 
     public List<GameObject> machines;
 
-    public void ProcessMaterials()
+    public void ProcessMaterials(int amount)
     {
-        if(inventoryManager.RawMaterials > 0 && financialManager.Funds > ProcessingCost)
+        if(inventoryManager.RawMaterials >= amount && financialManager.Funds > (ProcessingCost * amount))
         {
-            inventoryManager.RemoveRawMaterials(1);
-            inventoryManager.AddProcessedMaterials(1);
-            financialManager.RemoveFunds(ProcessingCost);
+            financialManager.RemoveFunds(ProcessingCost * amount);
+            inventoryManager.RemoveRawMaterials(amount);
+            inventoryManager.AddProcessedMaterials(amount);
         }
+    }
+
+    public void ProcessAllMaterials()
+    {
+        financialManager.RemoveFunds(ProcessingCost * inventoryManager.RawMaterials);
+        inventoryManager.AddProcessedMaterials(inventoryManager.RawMaterials);
+        inventoryManager.RemoveRawMaterials(inventoryManager.RawMaterials);
     }
 }
