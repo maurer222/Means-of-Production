@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SalesManager : MonoBehaviour
 {
@@ -8,13 +10,14 @@ public class SalesManager : MonoBehaviour
     [SerializeField] private FinancialManager FinancialManager;
     [SerializeField] private EmployeeManager employeeManager;
     [SerializeField] private float ProcessedMaterialsPrice = 26.37f;
+    [SerializeField] private TMP_InputField salesInput;
 
-    public void SellProcessedMaterials(int amount)
+    public void SellProcessedMaterials()
     {
-        if (inventoryManager.ProcessedMaterials > amount)
+        if (inventoryManager.ProcessedMaterials > int.Parse(salesInput.text))
         {
-            FinancialManager.AddFunds(ProcessedMaterialsPrice * amount);
-            inventoryManager.RemoveProcessedMaterials(amount);
+            FinancialManager.AddFunds(ProcessedMaterialsPrice * int.Parse(salesInput.text));
+            inventoryManager.RemoveProcessedMaterials(int.Parse(salesInput.text));
         }
     }
 

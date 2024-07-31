@@ -736,7 +736,7 @@ MonoBehaviour:
       - m_Target: {fileID: 1212271897}
         m_TargetAssemblyTypeName: PurchasingManager, Assembly-CSharp
         m_MethodName: PurchaseSelectedMaterials
-        m_Mode: 3
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2286,7 +2286,7 @@ MonoBehaviour:
       - m_Target: {fileID: 1212271896}
         m_TargetAssemblyTypeName: SalesManager, Assembly-CSharp
         m_MethodName: SellProcessedMaterials
-        m_Mode: 3
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2698,6 +2698,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8826967497023004879, guid: fd1db2e4ef34fa345bb6f387b39eaf78, type: 3}
   m_PrefabInstance: {fileID: 7534539727148257772}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1101861798 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 604464747436866398, guid: fd1db2e4ef34fa345bb6f387b39eaf78, type: 3}
+  m_PrefabInstance: {fileID: 7534539727148257772}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1187298919
 GameObject:
   m_ObjectHideFlags: 0
@@ -3039,6 +3044,7 @@ MonoBehaviour:
   FinancialManager: {fileID: 1212271895}
   employeeManager: {fileID: 1212271901}
   ProcessedMaterialsPrice: 49.99
+  salesInput: {fileID: 756629615}
 --- !u!114 &1212271897
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3056,6 +3062,7 @@ MonoBehaviour:
   employeeManager: {fileID: 1212271901}
   receivingArea: {fileID: 1616520974}
   RawMaterialCost: 18.21
+  purchasingInput: {fileID: 1698187275}
 --- !u!114 &1212271898
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4947,6 +4954,7 @@ Transform:
   m_Children:
   - {fileID: 1336050256}
   - {fileID: 1514823067}
+  - {fileID: 1101861798}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2029892879
@@ -5327,7 +5335,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1987174984}
     m_Modifications:
     - target: {fileID: 604464747436866398, guid: fd1db2e4ef34fa345bb6f387b39eaf78, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5351,7 +5359,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 604464747436866398, guid: fd1db2e4ef34fa345bb6f387b39eaf78, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 604464747436866398, guid: fd1db2e4ef34fa345bb6f387b39eaf78, type: 3}
       propertyPath: m_LocalRotation.z
@@ -5399,4 +5407,3 @@ SceneRoots:
   - {fileID: 1438502530}
   - {fileID: 1387415080}
   - {fileID: 1212271899}
-  - {fileID: 7534539727148257772}

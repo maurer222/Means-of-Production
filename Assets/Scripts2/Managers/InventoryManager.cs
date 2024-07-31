@@ -23,20 +23,20 @@ public class InventoryManager : MonoBehaviour
 
     public void RemoveRawMaterials(int amount)
     {
-        RawMaterials--;
+        RawMaterials-= amount;
         OnRawMaterialsChanged?.Invoke(RawMaterials);
     }
 
     public void AddProcessedMaterials(int amount)
     {
-        ProcessedMaterials++;
+        ProcessedMaterials += amount;
         dayCycleManager.ProcessMaterials(amount);
         OnProcessedMaterialsChanged?.Invoke(ProcessedMaterials);
     }
 
     public void RemoveProcessedMaterials(int amount)
     {
-        ProcessedMaterials--;
+        ProcessedMaterials -= amount;
         OnProcessedMaterialsChanged?.Invoke(ProcessedMaterials);
     }
 }

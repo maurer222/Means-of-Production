@@ -13,18 +13,39 @@ public class ProcessingManager : MonoBehaviour
 
     public void ProcessMaterials(int amount)
     {
-        if(inventoryManager.RawMaterials >= amount && financialManager.Funds > (ProcessingCost * amount))
+        for (int i = 0; i <= amount; i++)
         {
-            financialManager.RemoveFunds(ProcessingCost * amount);
-            inventoryManager.RemoveRawMaterials(amount);
-            inventoryManager.AddProcessedMaterials(amount);
+            if (financialManager.Funds > ProcessingCost && inventoryManager.RawMaterials > 0)
+            {
+                financialManager.RemoveFunds(ProcessingCost);
+                inventoryManager.AddProcessedMaterials(1);
+                inventoryManager.RemoveRawMaterials(1);
+            }
+            else
+            {
+                Debug.Log("Not enough funds to continue processing!");
+                break;
+            }
         }
     }
 
     public void ProcessAllMaterials()
     {
-        financialManager.RemoveFunds(ProcessingCost * inventoryManager.RawMaterials);
-        inventoryManager.AddProcessedMaterials(inventoryManager.RawMaterials);
-        inventoryManager.RemoveRawMaterials(inventoryManager.RawMaterials);
+        int processingTarget = inventoryManager.RawMaterials;
+
+        for (int i = 0; i <= processingTarget; i++) 
+        { 
+            if (financialManager.Funds > ProcessingCost && inventoryManager.RawMaterials > 0)
+            {
+                financialManager.RemoveFunds(ProcessingCost);
+                inventoryManager.AddProcessedMaterials(1);
+                inventoryManager.RemoveRawMaterials(1);
+            }
+            else
+            {
+                Debug.Log("Not enough funds to continue processing!");
+                break;
+            }
+        }
     }
 }
