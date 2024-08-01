@@ -17,17 +17,19 @@ public class PurchasingManager : MonoBehaviour
 
     public void PurchaseSelectedMaterials()
     {
-        if (financialManager.Funds > (RawMaterialCost * int.Parse(purchasingInput.text)))
+        for (int i = 0; i < int.Parse(purchasingInput.text); i++)
         {
-            int totalShipments = (int)Mathf.Floor(int.Parse(purchasingInput.text) / 20);
-
-            inventoryManager.AddRawMaterials(int.Parse(purchasingInput.text));
-            financialManager.RemoveFunds(RawMaterialCost * int.Parse(purchasingInput.text));
-            taskManager.AddTask(new Task(Task.TaskType.MoveMaterial, 1, 5f, 50));
-        }
-        else
-        {
-            Debug.Log("Not enough funds to buy " + int.Parse(purchasingInput.text) + " Raw Materials");
+            if (financialManager.Funds > RawMaterialCost)
+            {
+                inventoryManager.AddRawMaterials(1);
+                financialManager.RemoveFunds(RawMaterialCost);
+                taskManager.AddTask(new Task(Task.TaskType.MoveMaterial, 1, 5f, 50));
+            }
+            else
+            {
+                Debug.Log("Not enough funds to purchase!");
+                break;
+            }
         }
     }
 
@@ -35,7 +37,7 @@ public class PurchasingManager : MonoBehaviour
     {
         int totalPurchased = (int)(financialManager.Funds / RawMaterialCost);
 
-        for (int i = 0; i <= totalPurchased; i++)
+        for (int i = 0; i < totalPurchased; i++)
         {
             if (financialManager.Funds > RawMaterialCost)
             {

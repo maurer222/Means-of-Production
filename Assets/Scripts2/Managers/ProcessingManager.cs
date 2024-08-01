@@ -14,7 +14,7 @@ public class ProcessingManager : MonoBehaviour
 
     public void ProcessMaterials(int amount)
     {
-        for (int i = 0; i <= amount; i++)
+        for (int i = 0; i < amount; i++)
         {
             if (financialManager.Funds > ProcessingCost && inventoryManager.RawMaterials > 0)
             {
@@ -35,7 +35,7 @@ public class ProcessingManager : MonoBehaviour
     {
         int processingTarget = inventoryManager.RawMaterials;
 
-        for (int i = 0; i <= processingTarget; i++) 
+        for (int i = 0; i < processingTarget; i++) 
         { 
             if (financialManager.Funds > ProcessingCost && inventoryManager.RawMaterials > 0)
             {

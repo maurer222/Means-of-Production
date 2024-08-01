@@ -5,7 +5,7 @@ using UnityEngine;
 public class TaskManager : MonoBehaviour
 {
     public static TaskManager Instance;
-    [SerializeField] private List<Task> taskQueue = new List<Task>();
+    public List<Task> taskQueue = new List<Task>();
     public List<Employee> employees = new List<Employee>();
     private List<PurchaseOrder> purchaseOrders = new List<PurchaseOrder>();
     private List<SalesOrder> salesOrders = new List<SalesOrder>();
@@ -27,7 +27,7 @@ public class TaskManager : MonoBehaviour
     {
         foreach (Employee employee in employees)
         {
-            if (employee.isAvailable = true && employee.agent != null && taskQueue.Count > 0)
+            if (employee.isAvailable && employee.agent != null && taskQueue.Count > 0)
             {
                 Task nextTask = taskQueue[0];
                 taskQueue.RemoveAt(0);

@@ -15,7 +15,7 @@ public class SalesManager : MonoBehaviour
 
     public void SellProcessedMaterials()
     {
-        for (int i = 0; i <= int.Parse(salesInput.text); i++)
+        for (int i = 0; i < int.Parse(salesInput.text); i++)
         {
             if (inventoryManager.ProcessedMaterials > 0)
             {
@@ -35,7 +35,7 @@ public class SalesManager : MonoBehaviour
     {
         int targetSales = inventoryManager.ProcessedMaterials;
 
-        for (int i = 0; i <= targetSales; i++)
+        for (int i = 0; i < targetSales; i++)
         {
             if (inventoryManager.ProcessedMaterials > 0)
             {

@@ -32,13 +32,14 @@ public class Employee : MonoBehaviour
         agent.SetDestination(taskLocation);
 
         // Wait until the employee reaches the task location
-        while (agent.remainingDistance > agent.stoppingDistance)
-        {
-            yield return null;
-        }
+        //while (Mathf.Abs(Vector3.Distance(transform.position, agent.destination)) > agent.stoppingDistance)
+        //{
+        //    yield return null;
+        //}
 
         // Perform the task
         yield return new WaitForSeconds(CurrentTask.Duration);
+        Debug.Log("Task complete for " + name);
         CompleteTask();
     }
 
@@ -48,13 +49,13 @@ public class Employee : MonoBehaviour
         switch (taskType)
         {
             case TaskType.MoveMaterial:
-                return new Vector3(0, 0, 0); // Example location
+                return transform.position + new Vector3(Random.Range(-5, 5.1f), 0, Random.Range(-5, 5.1f));
             case TaskType.ProcessMaterial:
-                return new Vector3(10, 0, 0); // Example location
+                return transform.position + new Vector3(Random.Range(-5, 5.1f), 0, Random.Range(-5, 5.1f));
             case TaskType.LoadTruck:
-                return new Vector3(20, 0, 0); // Example location
+                return transform.position + new Vector3(Random.Range(-5, 5.1f), 0, Random.Range(-5, 5.1f));
             case TaskType.UnloadTruck:
-                return new Vector3(20, 0, 0); // Example location
+                return transform.position + new Vector3(Random.Range(-5, 5.1f), 0, Random.Range(-5, 5.1f));
             default:
                 return Vector3.zero;
         }
@@ -62,10 +63,9 @@ public class Employee : MonoBehaviour
 
     private void CompleteTask()
     {
+        TaskManager.Instance.TaskCompleted(this);
         CurrentTask = null;
         isAvailable = true;
-        TaskManager.Instance.TaskCompleted(this);
-        Debug.Log( CurrentTask.Type.ToString() + " complete");
         // Trigger task completion events or logic here
     }
 }
