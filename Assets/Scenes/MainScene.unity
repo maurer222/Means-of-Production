@@ -2139,7 +2139,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &887469451
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2159,7 +2159,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 30}
+  m_AnchoredPosition: {x: 161, y: -458}
   m_SizeDelta: {x: -1720, y: -940}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &887469452
@@ -2986,6 +2986,7 @@ GameObject:
   - component: {fileID: 1212271894}
   - component: {fileID: 1212271900}
   - component: {fileID: 1212271901}
+  - component: {fileID: 1212271902}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -3041,8 +3042,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventoryManager: {fileID: 1212271894}
-  FinancialManager: {fileID: 1212271895}
+  financialManager: {fileID: 1212271895}
   employeeManager: {fileID: 1212271901}
+  taskManager: {fileID: 1212271902}
   ProcessedMaterialsPrice: 49.99
   salesInput: {fileID: 756629615}
 --- !u!114 &1212271897
@@ -3060,6 +3062,7 @@ MonoBehaviour:
   inventoryManager: {fileID: 1212271894}
   financialManager: {fileID: 1212271895}
   employeeManager: {fileID: 1212271901}
+  taskManager: {fileID: 1212271902}
   receivingArea: {fileID: 1616520974}
   RawMaterialCost: 18.21
   purchasingInput: {fileID: 1698187275}
@@ -3078,6 +3081,7 @@ MonoBehaviour:
   inventoryManager: {fileID: 1212271894}
   financialManager: {fileID: 1212271895}
   employeeManager: {fileID: 1212271901}
+  taskManager: {fileID: 1212271902}
   ProcessingCost: 0.21
   machines:
   - {fileID: 7534539727148257773}
@@ -3133,6 +3137,19 @@ MonoBehaviour:
   employeeParent: {fileID: 2047715616}
   employees: []
   hireCost: 50
+--- !u!114 &1212271902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1212271893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 337711c8461ce1b47ac984e062d7edbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  employees: []
 --- !u!1 &1222273681
 GameObject:
   m_ObjectHideFlags: 0
@@ -3657,7 +3674,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1362796193
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3677,7 +3694,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 30}
+  m_AnchoredPosition: {x: 402, y: -458}
   m_SizeDelta: {x: -1720, y: -940}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1362796194
@@ -3693,7 +3710,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.6320754, b: 0.05657117, a: 0.5176471}
+  m_Color: {r: 0.8235295, g: 0.15294118, b: 0.08235294, a: 0.5176471}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

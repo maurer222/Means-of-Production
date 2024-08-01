@@ -7,6 +7,7 @@ public class ProcessingManager : MonoBehaviour
     [SerializeField] private InventoryManager inventoryManager;
     [SerializeField] private FinancialManager financialManager;
     [SerializeField] private EmployeeManager employeeManager;
+    [SerializeField] private TaskManager taskManager;
     [SerializeField] private float ProcessingCost = 0.21f;
 
     public List<GameObject> machines;
@@ -20,6 +21,7 @@ public class ProcessingManager : MonoBehaviour
                 financialManager.RemoveFunds(ProcessingCost);
                 inventoryManager.AddProcessedMaterials(1);
                 inventoryManager.RemoveRawMaterials(1);
+                taskManager.AddTask(new Task(Task.TaskType.ProcessMaterial, 1, 5f, 25));
             }
             else
             {
@@ -40,6 +42,7 @@ public class ProcessingManager : MonoBehaviour
                 financialManager.RemoveFunds(ProcessingCost);
                 inventoryManager.AddProcessedMaterials(1);
                 inventoryManager.RemoveRawMaterials(1);
+                taskManager.AddTask(new Task(Task.TaskType.ProcessMaterial, 1, 5f, 25));
             }
             else
             {

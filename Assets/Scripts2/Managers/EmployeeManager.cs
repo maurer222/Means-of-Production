@@ -9,7 +9,7 @@ public class EmployeeManager : MonoBehaviour
     [SerializeField] private Transform employeeParent;
 
     public List<GameObject> employees = new List<GameObject>();
-    public Queue<Task> taskQueue = new Queue<Task>();
+    //public Queue<Task> taskQueue = new Queue<Task>();
     public float hireCost = 500.0f;
 
     public void HireEmployee()
@@ -32,31 +32,31 @@ public class EmployeeManager : MonoBehaviour
         }
     }
 
-    public void AddTaskToQueue(Task task)
-    {
-        taskQueue.Enqueue(task);
-        //Debug.Log("Adding " + task.TaskName + " to queue");
-    }
+    //public void AddTaskToQueue(Task task)
+    //{
+    //    taskQueue.Enqueue(task);
+    //    Debug.Log("Adding " + task.Type.ToString() + " to queue");
+    //}
 
-    private void AssignTasks()
-    {
-        Employee employeeScript;
+    //private void AssignTasks()
+    //{
+    //    Employee employeeScript;
 
-        foreach (GameObject employee in employees)
-        {
-            employeeScript = employee.GetComponent<Employee>();
+    //    foreach (GameObject employee in employees)
+    //    {
+    //        employeeScript = employee.GetComponent<Employee>();
 
-            if (employeeScript.CurrentTask == null && taskQueue.Count > 0)
-            {
-                Task nextTask = taskQueue.Dequeue();
-                employeeScript.AssignTask(nextTask);
-                //Debug.Log("Assigning " + nextTask.TaskName + " to " + employee.name);
-            }
-        }
-    }
+    //        if (employeeScript.CurrentTask == null && taskQueue.Count > 0)
+    //        {
+    //            Task nextTask = taskQueue.Dequeue();
+    //            employeeScript.AssignTask(nextTask);
+    //            //Debug.Log("Assigning " + nextTask.TaskName + " to " + employee.name);
+    //        }
+    //    }
+    ////}
 
-    void Update()
-    {
-        AssignTasks();
-    }
+    //void Update()
+    //{
+    //    AssignTasks();
+    //}
 }

@@ -3,29 +3,21 @@ using UnityEngine;
 
 public class Task
 {
-    public enum TaskType
-    {
-        MoveMaterial,
-        ProcessMaterial,
-        ShipMaterial
-    }
-
+    public enum TaskType { MoveMaterial, 
+                           ProcessMaterial, 
+                           LoadTruck, 
+                           UnloadTruck }
     public TaskType Type { get; private set; }
-    public int Priority { get; private set; }
+    public int Quantity { get; private set; }
     public float Duration { get; private set; }
-    public bool IsCompleted { get; set; }
-    // Add more properties as needed
+    public int Priority { get; private set; }
+    public int Destination { get; private set; }
 
-    public Task(TaskType type, int priority, float duration)
+    public Task(TaskType type, int quantity, float duration, int priority)
     {
         Type = type;
-        Priority = priority;
+        Quantity = quantity;
         Duration = duration;
-        IsCompleted = false;
-    }
-
-    public void PerformTask()
-    {
-        IsCompleted = true;
+        Priority = priority;
     }
 }

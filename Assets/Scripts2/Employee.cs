@@ -5,23 +5,27 @@ using static Task;
 
 public class Employee : MonoBehaviour
 {
+    public bool isAvailable { get; set; } = true;
+
     public int EmployeeID;
     public string Name;
     public Task CurrentTask;
-    public NavMeshAgent agent; // Attach a NavMeshAgent component to the employee
+    public NavMeshAgent agent;
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        TaskManager.Instance.RegisterEmployee(this);
     }
 
     public void AssignTask(Task task)
     {
         CurrentTask = task;
-        StartCoroutine(CompleteTaskCoroutine());
+        isAvailable = false;
+        StartCoroutine(PerformTask());
     }
 
-    private IEnumerator CompleteTaskCoroutine()
+    private IEnumerator PerformTask()
     {
         // Move to the task location
         Vector3 taskLocation = GetTaskLocation(CurrentTask.Type);
@@ -47,7 +51,9 @@ public class Employee : MonoBehaviour
                 return new Vector3(0, 0, 0); // Example location
             case TaskType.ProcessMaterial:
                 return new Vector3(10, 0, 0); // Example location
-            case TaskType.ShipMaterial:
+            case TaskType.LoadTruck:
+                return new Vector3(20, 0, 0); // Example location
+            case TaskType.UnloadTruck:
                 return new Vector3(20, 0, 0); // Example location
             default:
                 return Vector3.zero;
@@ -56,8 +62,10 @@ public class Employee : MonoBehaviour
 
     private void CompleteTask()
     {
-        CurrentTask.IsCompleted = true;
         CurrentTask = null;
+        isAvailable = true;
+        TaskManager.Instance.TaskCompleted(this);
+        Debug.Log( CurrentTask.Type.ToString() + " complete");
         // Trigger task completion events or logic here
     }
 }
