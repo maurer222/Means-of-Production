@@ -27,35 +27,34 @@ public class Employee : MonoBehaviour
 
     private IEnumerator PerformTask()
     {
-        // Move to the task location
         Vector3 taskLocation = GetTaskLocation(CurrentTask.Type);
         agent.SetDestination(taskLocation);
 
-        // Wait until the employee reaches the task location
-        //while (Mathf.Abs(Vector3.Distance(transform.position, agent.destination)) > agent.stoppingDistance)
-        //{
-        //    yield return null;
-        //}
+        while (agent.remainingDistance > agent.stoppingDistance)
+        {
+            yield return null;
+        }
 
-        // Perform the task
         yield return new WaitForSeconds(CurrentTask.Duration);
-        Debug.Log("Task complete for " + name);
         CompleteTask();
     }
 
-    private Vector3 GetTaskLocation(TaskType taskType)
+    private Vector3 GetTaskLocation(Task.TaskType taskType)
     {
-        // Define task locations based on task type
         switch (taskType)
         {
-            case TaskType.MoveMaterial:
-                return transform.position + new Vector3(Random.Range(-5, 5.1f), 0, Random.Range(-5, 5.1f));
-            case TaskType.ProcessMaterial:
-                return transform.position + new Vector3(Random.Range(-5, 5.1f), 0, Random.Range(-5, 5.1f));
-            case TaskType.LoadTruck:
-                return transform.position + new Vector3(Random.Range(-5, 5.1f), 0, Random.Range(-5, 5.1f));
-            case TaskType.UnloadTruck:
-                return transform.position + new Vector3(Random.Range(-5, 5.1f), 0, Random.Range(-5, 5.1f));
+            case Task.TaskType.MoveMaterialToReceiving:
+                return InventoryManager.receivingDocks[0].position;
+            case Task.TaskType.MoveMaterialToStorage:
+                return InventoryManager.receivingAreas[0].position;
+            case Task.TaskType.MoveMaterialToMachine:
+                return ProcessingManager.machines[0].transform.position;
+            case Task.TaskType.MoveProcessedMaterialToStorage:
+                return InventoryManager.storageAreas[0].position;
+            case Task.TaskType.MoveMaterialToLoading:
+                return InventoryManager.loadingAreas[0].position;
+            case Task.TaskType.MoveMaterialToTruck:
+                return InventoryManager.loadingDocks[0].position;
             default:
                 return Vector3.zero;
         }
@@ -63,9 +62,8 @@ public class Employee : MonoBehaviour
 
     private void CompleteTask()
     {
-        TaskManager.Instance.TaskCompleted(this);
         CurrentTask = null;
         isAvailable = true;
-        // Trigger task completion events or logic here
+        TaskManager.Instance.AssignTasks();
     }
 }

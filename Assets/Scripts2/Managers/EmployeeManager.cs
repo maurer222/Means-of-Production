@@ -31,32 +31,4 @@ public class EmployeeManager : MonoBehaviour
             Debug.Log("Not enough funds to hire an employee.");
         }
     }
-
-    //public void AddTaskToQueue(Task task)
-    //{
-    //    taskQueue.Enqueue(task);
-    //    Debug.Log("Adding " + task.Type.ToString() + " to queue");
-    //}
-
-    //private void AssignTasks()
-    //{
-    //    Employee employeeScript;
-
-    //    foreach (GameObject employee in employees)
-    //    {
-    //        employeeScript = employee.GetComponent<Employee>();
-
-    //        if (employeeScript.CurrentTask == null && taskQueue.Count > 0)
-    //        {
-    //            Task nextTask = taskQueue.Dequeue();
-    //            employeeScript.AssignTask(nextTask);
-    //            //Debug.Log("Assigning " + nextTask.TaskName + " to " + employee.name);
-    //        }
-    //    }
-    ////}
-
-    //void Update()
-    //{
-    //    AssignTasks();
-    //}
 }

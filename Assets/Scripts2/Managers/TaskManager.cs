@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -18,21 +19,26 @@ public class TaskManager : MonoBehaviour
     public void AddTask(Task task)
     {
         taskQueue.Add(task);
-        taskQueue.Sort((x, y) => x.Priority.CompareTo(y.Priority));
-        Debug.Log(task.Type.ToString() + " in queue");
+        SortTaskQueue();
         AssignTasks();
+        Debug.Log(task.Type.ToString() + " in queue");
     }
 
-    private void AssignTasks()
+    private void SortTaskQueue()
     {
-        foreach (Employee employee in employees)
+        taskQueue.Sort((x, y) => x.Priority.CompareTo(y.Priority));
+    }
+
+    public void AssignTasks()
+    {
+        foreach (var employee in employees)
         {
-            if (employee.isAvailable && employee.agent != null && taskQueue.Count > 0)
+            if (employee.isAvailable && taskQueue.Count > 0)
             {
-                Task nextTask = taskQueue[0];
+                var task = taskQueue[0];
                 taskQueue.RemoveAt(0);
-                employee.AssignTask(nextTask);
-                Debug.Log(nextTask.Type.ToString() + " assigned");
+                employee.AssignTask(task);
+                Debug.Log(task.Type.ToString() + " assigned");
             }
         }
     }
