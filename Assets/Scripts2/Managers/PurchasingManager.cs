@@ -15,6 +15,68 @@ public class PurchasingManager : MonoBehaviour
     [SerializeField] private float RawMaterialCost = 18.21f;
     [SerializeField] private TMP_InputField purchasingInput;
 
+    public void CreateSelectedPurchaseOrder()
+    {
+        int amount = int.Parse(purchasingInput.text);
+        int numShipments = Mathf.CeilToInt((float)amount / 20);
+
+        for (int i = 0; i < numShipments; i++)
+        {
+            int materialsToPurchase = Mathf.Min(amount, 20);
+            if (financialManager.Funds >= materialsToPurchase * RawMaterialCost)
+            {
+                financialManager.RemoveFunds(materialsToPurchase * RawMaterialCost);
+                for (int j = 0; j < materialsToPurchase; j++)
+                {
+                    Task moveToReceiving = new Task(Task.TaskType.MoveMaterialToReceiving, 1, 5f, 1);
+                    Task moveToStorage = new Task(Task.TaskType.MoveMaterialToStorage, 1, 5f, 2);
+                    taskManager.AddTask(moveToReceiving);
+                    taskManager.AddTask(moveToStorage);
+                    inventoryManager.AddRawMaterials(1);
+                }
+                amount -= materialsToPurchase;
+            }
+            else
+            {
+                Debug.Log("Not enough funds to complete the purchase order!");
+                break;
+            }
+
+            Debug.Log("Order created");
+        }
+    }
+
+    public void CreateMaxPurchaseOrder()
+    {
+        int amount = int.Parse(purchasingInput.text);
+        int numShipments = Mathf.CeilToInt(amount / 20);
+
+        for (int i = 0; i < numShipments; i++)
+        {
+            int materialsToPurchase = Mathf.Min(amount, 20);
+            if (financialManager.Funds >= materialsToPurchase * RawMaterialCost)
+            {
+                financialManager.RemoveFunds(materialsToPurchase * RawMaterialCost);
+                for (int j = 0; j < materialsToPurchase; j++)
+                {
+                    Task moveToReceiving = new Task(Task.TaskType.MoveMaterialToReceiving, 1, 5f, 80);
+                    Task moveToStorage = new Task(Task.TaskType.MoveMaterialToStorage, 1, 5f, 70);
+                    taskManager.AddTask(moveToReceiving);
+                    taskManager.AddTask(moveToStorage);
+                    inventoryManager.AddRawMaterials(1);
+                }
+                amount -= materialsToPurchase;
+            }
+            else
+            {
+                Debug.Log("Not enough funds to complete the purchase order!");
+                break;
+            }
+
+            Debug.Log("Order created");
+        }
+    }
+
     //public void PurchaseSelectedMaterials()
     //{
     //    for (int i = 0; i < int.Parse(purchasingInput.text); i++)
@@ -52,32 +114,4 @@ public class PurchasingManager : MonoBehaviour
     //        }
     //    }
     //}
-
-    public void CreatePurchaseOrder(int amount)
-    {
-        int numShipments = Mathf.CeilToInt((float)amount / 20);
-
-        for (int i = 0; i < numShipments; i++)
-        {
-            int materialsToPurchase = Mathf.Min(amount, 20);
-            if (financialManager.Funds >= materialsToPurchase * RawMaterialCost)
-            {
-                financialManager.RemoveFunds(materialsToPurchase * RawMaterialCost);
-                for (int j = 0; j < materialsToPurchase; j++)
-                {
-                    Task moveToReceiving = new Task(Task.TaskType.MoveMaterialToReceiving, 1, 5f, 1);
-                    Task moveToStorage = new Task(Task.TaskType.MoveMaterialToStorage, 1, 5f, 2);
-                    taskManager.AddTask(moveToReceiving);
-                    taskManager.AddTask(moveToStorage);
-                    inventoryManager.AddRawMaterials(1);
-                }
-                amount -= materialsToPurchase;
-            }
-            else
-            {
-                Debug.Log("Not enough funds to complete the purchase order!");
-                break;
-            }
-        }
-    }
 }

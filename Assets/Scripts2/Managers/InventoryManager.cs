@@ -5,12 +5,12 @@ using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
 {
-    public static List<Transform> receivingAreas;
-    public static List<Transform> loadingAreas;
-    public static List<Transform> storageAreas;
-    public static List<Transform> receivingDocks;
-    public static List<Transform> loadingDocks;
-    public DayCycleManager dayCycleManager;
+    [SerializeField] public List<Transform> receivingAreas;
+    [SerializeField] public List<Transform> loadingAreas;
+    [SerializeField] public List<Transform> storageAreas;
+    [SerializeField] public List<Transform> receivingDocks;
+    [SerializeField] public List<Transform> loadingDocks;
+    [SerializeField] public DayCycleManager dayCycleManager;
     public int RawMaterials = 0;
     public int ProcessedMaterials = 0;
 

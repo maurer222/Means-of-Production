@@ -10,7 +10,34 @@ public class ProcessingManager : MonoBehaviour
     [SerializeField] private TaskManager taskManager;
     [SerializeField] private float ProcessingCost = 0.21f;
 
-    public static List<GameObject> machines;
+    [SerializeField] public List<GameObject> machines;
+
+    public void ProcessMaterials(int amount)
+    {
+        for (int i = 0; i < amount; i++)
+        {
+            if (financialManager.Funds > ProcessingCost && inventoryManager.RawMaterials > 0)
+            {
+                financialManager.RemoveFunds(ProcessingCost);
+                Task moveToMachine = new Task(Task.TaskType.MoveMaterialToMachine, 1, 5f, 1);
+                Task processMaterial = new Task(Task.TaskType.MoveMaterialToStorage, 1, 5f, 2);
+                taskManager.AddTask(moveToMachine);
+                taskManager.AddTask(processMaterial);
+                inventoryManager.RemoveRawMaterials(1);
+            }
+            else
+            {
+                Debug.Log("Not enough funds or raw materials to continue processing!");
+                break;
+            }
+        }
+    }
+
+    public void ProcessAllMaterials()
+    {
+        int processingTarget = inventoryManager.RawMaterials;
+        ProcessMaterials(processingTarget);
+    }
 
     //public void ProcessMaterials(int amount)
     //{
@@ -51,31 +78,4 @@ public class ProcessingManager : MonoBehaviour
     //        }
     //    }
     //}
-
-    public void ProcessMaterials(int amount)
-    {
-        for (int i = 0; i < amount; i++)
-        {
-            if (financialManager.Funds > ProcessingCost && inventoryManager.RawMaterials > 0)
-            {
-                financialManager.RemoveFunds(ProcessingCost);
-                Task moveToMachine = new Task(Task.TaskType.MoveMaterialToMachine, 1, 5f, 1);
-                Task processMaterial = new Task(Task.TaskType.MoveMaterialToStorage, 1, 5f, 2);
-                taskManager.AddTask(moveToMachine);
-                taskManager.AddTask(processMaterial);
-                inventoryManager.RemoveRawMaterials(1);
-            }
-            else
-            {
-                Debug.Log("Not enough funds or raw materials to continue processing!");
-                break;
-            }
-        }
-    }
-
-    public void ProcessAllMaterials()
-    {
-        int processingTarget = inventoryManager.RawMaterials;
-        ProcessMaterials(processingTarget);
-    }
 }
