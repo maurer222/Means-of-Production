@@ -2428,8 +2428,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.12768616, y: 0.87033033, z: -0.3033689, w: -0.36631778}
-  m_LocalPosition: {x: 35.560684, y: 15.362165, z: 15.788434}
+  m_LocalRotation: {x: 0.09101771, y: -0.90063506, z: 0.22901115, w: 0.3579472}
+  m_LocalPosition: {x: 35.443893, y: 6.330223, z: 16.911448}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2989,14 +2989,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1212271899}
-  - component: {fileID: 1212271898}
-  - component: {fileID: 1212271897}
-  - component: {fileID: 1212271896}
-  - component: {fileID: 1212271895}
-  - component: {fileID: 1212271894}
-  - component: {fileID: 1212271900}
-  - component: {fileID: 1212271901}
   - component: {fileID: 1212271902}
+  - component: {fileID: 1212271894}
+  - component: {fileID: 1212271895}
+  - component: {fileID: 1212271901}
+  - component: {fileID: 1212271897}
+  - component: {fileID: 1212271898}
+  - component: {fileID: 1212271896}
+  - component: {fileID: 1212271900}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -3097,7 +3097,8 @@ MonoBehaviour:
   employeeManager: {fileID: 1212271901}
   taskManager: {fileID: 1212271902}
   ProcessingCost: 0.21
-  machines: []
+  machines:
+  - {fileID: 2080619372}
 --- !u!4 &1212271899
 Transform:
   m_ObjectHideFlags: 0
@@ -3459,14 +3460,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1336050255}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -62.1, y: 1, z: 18.2}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 41.21, y: 1, z: 7.49}
   m_LocalScale: {x: 2, y: 2, z: 6}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1393811556}
   m_Father: {fileID: 1987174984}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!65 &1336050257
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4067,14 +4068,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1514823066}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -62.1, y: 1, z: -18.2}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -41.22, y: 1, z: -7.38}
   m_LocalScale: {x: 2, y: 2, z: 6}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 154719112}
   m_Father: {fileID: 1987174984}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!65 &1514823068
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5313,6 +5314,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2059269208}
   m_CullTransparentMesh: 1
+--- !u!1 &2080619372 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7821029892014783552, guid: fd1db2e4ef34fa345bb6f387b39eaf78, type: 3}
+  m_PrefabInstance: {fileID: 7534539727148257772}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2091420876
 GameObject:
   m_ObjectHideFlags: 0
@@ -5413,6 +5419,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4018285218654426647, guid: fd1db2e4ef34fa345bb6f387b39eaf78, type: 3}
+      propertyPath: m_NavMeshData
+      value: 
+      objectReference: {fileID: 23800000, guid: fe558aa044913954dac2bc1aa9dd34e1, type: 2}
     - target: {fileID: 8868053287723669518, guid: fd1db2e4ef34fa345bb6f387b39eaf78, type: 3}
       propertyPath: m_Name
       value: Warehouse

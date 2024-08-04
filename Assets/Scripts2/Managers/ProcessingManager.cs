@@ -19,11 +19,12 @@ public class ProcessingManager : MonoBehaviour
             if (financialManager.Funds > ProcessingCost && inventoryManager.RawMaterials > 0)
             {
                 financialManager.RemoveFunds(ProcessingCost);
-                Task moveToMachine = new Task(Task.TaskType.MoveMaterialToMachine, 1, 5f, 1);
-                Task processMaterial = new Task(Task.TaskType.MoveMaterialToStorage, 1, 5f, 2);
+                Task moveToMachine = new Task(Task.TaskType.PickForProcessing, 1, 5f, 70);
+                Task processMaterial = new Task(Task.TaskType.PutawayFromProcessing, 1, 5f, 60);
                 taskManager.AddTask(moveToMachine);
                 taskManager.AddTask(processMaterial);
                 inventoryManager.RemoveRawMaterials(1);
+                inventoryManager.AddProcessedMaterials(1);
             }
             else
             {

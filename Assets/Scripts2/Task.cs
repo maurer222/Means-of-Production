@@ -5,12 +5,12 @@ using UnityEngine;
 public class Task
 {
     public enum TaskType {
-        MoveMaterialToReceiving,
-        MoveMaterialToStorage,
-        MoveMaterialToMachine,
-        MoveProcessedMaterialToStorage,
-        MoveMaterialToLoading,
-        MoveMaterialToTruck
+        UnlockTruck,
+        PutawayFromReceiving,
+        PickForProcessing,
+        PutawayFromProcessing,
+        PickForShipping,
+        LoadTruck
     }
 
     public TaskType Type { get; private set; }
@@ -18,11 +18,14 @@ public class Task
     public float Duration { get; private set; }
     public int Priority { get; private set; }
 
+    public string Description;
+
     public Task(TaskType type, int quantity, float duration, int priority)
     {
         Type = type;
         Quantity = quantity;
         Duration = duration;
         Priority = priority;
+        Description = type.ToString();
     }
 }

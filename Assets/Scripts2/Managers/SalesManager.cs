@@ -17,7 +17,7 @@ public class SalesManager : MonoBehaviour
     {
         int amount = int.Parse(salesInput.text);
         int totalProcessedMaterials = inventoryManager.ProcessedMaterials;
-        int numShipments = Mathf.CeilToInt(amount / 20);
+        int numShipments = Mathf.CeilToInt((float)amount / 20);
 
         for (int i = 0; i < numShipments; i++)
         {
@@ -26,8 +26,8 @@ public class SalesManager : MonoBehaviour
             {
                 for (int j = 0; j < materialsToShip; j++)
                 {
-                    Task moveToLoading = new Task(Task.TaskType.MoveMaterialToLoading, 1, 5f, 1);
-                    Task moveToTruck = new Task(Task.TaskType.MoveMaterialToTruck, 1, 5f, 2);
+                    Task moveToLoading = new Task(Task.TaskType.PickForShipping, 1, 5f, 50);
+                    Task moveToTruck = new Task(Task.TaskType.LoadTruck, 1, 5f, 40);
                     taskManager.AddTask(moveToLoading);
                     taskManager.AddTask(moveToTruck);
                     inventoryManager.RemoveProcessedMaterials(1);
@@ -41,14 +41,14 @@ public class SalesManager : MonoBehaviour
                 break;
             }
 
-            Debug.Log("Shipment created");
+            //Debug.Log("Shipment created");
         }
     }
 
     public void CreateMaxSalesOrder()
     {
         int totalProcessedMaterials = inventoryManager.ProcessedMaterials;
-        int numShipments = Mathf.CeilToInt(totalProcessedMaterials / 20);
+        int numShipments = Mathf.CeilToInt((float)totalProcessedMaterials / 20);
 
         for (int i = 0; i < numShipments; i++)
         {
@@ -57,8 +57,8 @@ public class SalesManager : MonoBehaviour
             {
                 for (int j = 0; j < materialsToShip; j++)
                 {
-                    Task moveToLoading = new Task(Task.TaskType.MoveMaterialToLoading, 1, 5f, 1);
-                    Task moveToTruck = new Task(Task.TaskType.MoveMaterialToTruck, 1, 5f, 2);
+                    Task moveToLoading = new Task(Task.TaskType.PickForShipping, 1, 5f, 50);
+                    Task moveToTruck = new Task(Task.TaskType.LoadTruck, 1, 5f, 40);
                     taskManager.AddTask(moveToLoading);
                     taskManager.AddTask(moveToTruck);
                     inventoryManager.RemoveProcessedMaterials(1);
@@ -72,7 +72,7 @@ public class SalesManager : MonoBehaviour
                 break;
             }
 
-            Debug.Log("Shipment created");
+            //Debug.Log("Shipment created");
         }
     }
 

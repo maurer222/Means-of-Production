@@ -21,12 +21,12 @@ public class TaskManager : MonoBehaviour
         taskQueue.Add(task);
         SortTaskQueue();
         AssignTasks();
-        Debug.Log(task.Type.ToString() + " in queue");
+        //Debug.Log(task.Type.ToString() + " in queue");
     }
 
     private void SortTaskQueue()
     {
-        taskQueue.Sort((x, y) => x.Priority.CompareTo(y.Priority));
+        taskQueue.Sort((x, y) => y.Priority.CompareTo(x.Priority));
     }
 
     public void AssignTasks()

@@ -28,8 +28,8 @@ public class PurchasingManager : MonoBehaviour
                 financialManager.RemoveFunds(materialsToPurchase * RawMaterialCost);
                 for (int j = 0; j < materialsToPurchase; j++)
                 {
-                    Task moveToReceiving = new Task(Task.TaskType.MoveMaterialToReceiving, 1, 5f, 1);
-                    Task moveToStorage = new Task(Task.TaskType.MoveMaterialToStorage, 1, 5f, 2);
+                    Task moveToReceiving = new Task(Task.TaskType.UnlockTruck, 1, 10f, 90);
+                    Task moveToStorage = new Task(Task.TaskType.PutawayFromReceiving, 1, 10f, 80);
                     taskManager.AddTask(moveToReceiving);
                     taskManager.AddTask(moveToStorage);
                     inventoryManager.AddRawMaterials(1);
@@ -42,14 +42,14 @@ public class PurchasingManager : MonoBehaviour
                 break;
             }
 
-            Debug.Log("Order created");
+            //Debug.Log("Purchase Order created");
         }
     }
 
     public void CreateMaxPurchaseOrder()
     {
-        int amount = int.Parse(purchasingInput.text);
-        int numShipments = Mathf.CeilToInt(amount / 20);
+        int amount = (int)(financialManager.Funds/RawMaterialCost);
+        int numShipments = Mathf.CeilToInt((float)amount / 20);
 
         for (int i = 0; i < numShipments; i++)
         {
@@ -59,8 +59,8 @@ public class PurchasingManager : MonoBehaviour
                 financialManager.RemoveFunds(materialsToPurchase * RawMaterialCost);
                 for (int j = 0; j < materialsToPurchase; j++)
                 {
-                    Task moveToReceiving = new Task(Task.TaskType.MoveMaterialToReceiving, 1, 5f, 80);
-                    Task moveToStorage = new Task(Task.TaskType.MoveMaterialToStorage, 1, 5f, 70);
+                    Task moveToReceiving = new Task(Task.TaskType.UnlockTruck, 1, 10f, 90);
+                    Task moveToStorage = new Task(Task.TaskType.PutawayFromReceiving, 1, 10f, 80);
                     taskManager.AddTask(moveToReceiving);
                     taskManager.AddTask(moveToStorage);
                     inventoryManager.AddRawMaterials(1);
@@ -73,7 +73,7 @@ public class PurchasingManager : MonoBehaviour
                 break;
             }
 
-            Debug.Log("Order created");
+            //Debug.Log("Purchase Order created");
         }
     }
 
