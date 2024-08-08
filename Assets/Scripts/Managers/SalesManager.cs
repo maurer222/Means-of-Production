@@ -26,10 +26,10 @@ public class SalesManager : MonoBehaviour
             {
                 for (int j = 0; j < materialsToShip; j++)
                 {
-                    Task moveToLoading = new Task(Task.TaskType.PickForShipping, 1, 5f, 50);
-                    Task moveToTruck = new Task(Task.TaskType.LoadTruck, 1, 5f, 40);
-                    taskManager.AddTask(moveToLoading);
-                    taskManager.AddTask(moveToTruck);
+                    //Task moveToLoading = new Task(Task.TaskType.PickForShipping, 1, 5f, 50);
+                    //Task moveToTruck = new Task(Task.TaskType.LoadTruck, 1, 5f, 40);
+                    //taskManager.AddTask(moveToLoading);
+                    //taskManager.AddTask(moveToTruck);
                     inventoryManager.RemoveProcessedMaterials(1);
                     financialManager.AddFunds(ProcessedMaterialsPrice);
                 }
@@ -57,10 +57,10 @@ public class SalesManager : MonoBehaviour
             {
                 for (int j = 0; j < materialsToShip; j++)
                 {
-                    Task moveToLoading = new Task(Task.TaskType.PickForShipping, 1, 5f, 50);
-                    Task moveToTruck = new Task(Task.TaskType.LoadTruck, 1, 5f, 40);
-                    taskManager.AddTask(moveToLoading);
-                    taskManager.AddTask(moveToTruck);
+                    //Task moveToLoading = new Task(Task.TaskType.PickForShipping, 1, 5f, 50);
+                    //Task moveToTruck = new Task(Task.TaskType.LoadTruck, 1, 5f, 40);
+                    //taskManager.AddTask(moveToLoading);
+                    //taskManager.AddTask(moveToTruck);
                     inventoryManager.RemoveProcessedMaterials(1);
                     financialManager.AddFunds(ProcessedMaterialsPrice);
                 }

@@ -1,21 +1,29 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
 {
-    [SerializeField] public List<Transform> receivingAreas;
-    [SerializeField] public List<Transform> loadingAreas;
-    [SerializeField] public List<Transform> storageAreas;
+    [SerializeField] public DayCycleManager dayCycleManager;
+
     [SerializeField] public List<Transform> receivingDocks;
     [SerializeField] public List<Transform> loadingDocks;
-    [SerializeField] public DayCycleManager dayCycleManager;
+
+    [SerializeField] public List<StorageArea> ReceivingAreas { get; private set; }
+    [SerializeField] public List<StorageArea> GeneralStorageAreas { get; private set; }
+    [SerializeField] public List<StorageArea> ShippingAreas { get; private set; }
+
     public int RawMaterials = 0;
     public int ProcessedMaterials = 0;
 
     public event Action<int> OnRawMaterialsChanged;
     public event Action<int> OnProcessedMaterialsChanged;
+    private void Awake()
+    {
+        ReceivingAreas = new List<StorageArea>();
+        GeneralStorageAreas = new List<StorageArea>();
+        ShippingAreas = new List<StorageArea>();
+    }
 
     public void AddRawMaterials(int amount)
     {
