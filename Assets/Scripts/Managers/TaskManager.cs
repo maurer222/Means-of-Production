@@ -78,6 +78,24 @@ public class TaskManager : MonoBehaviour
         }
     }
 
+    public void MonitorAndReassignTasks()
+    {
+        foreach (var task in inProgressTasks)
+        {
+            if (task.State == Task.TaskState.AwaitingReassignment)
+            {
+                // Logic to find a new path or reassign the task
+                RecalculatePathOrAssignNewTask(task);
+            }
+        }
+    }
+
+    private void RecalculatePathOrAssignNewTask(Task task)
+    {
+        // Recalculate the path based on current conditions
+        // Reassign employees or split the task if needed
+    }
+
     public void TaskCompleted(Employee employee)
     {
         AssignTasks();

@@ -14,9 +14,11 @@ public class Employee : MonoBehaviour
     public bool IsAvailable => CurrentTask == null;
 
     public Task CurrentTask;
+    public NavMeshAgent agent;
     public int EmployeeID;
     public string Name;
-    public NavMeshAgent agent;
+
+    private int currentLocationIndex;
     private InventoryManager inventoryManager;
     private ProcessingManager processingManager;
 
@@ -39,6 +41,7 @@ public class Employee : MonoBehaviour
     public void AssignTask(Task task)
     {
         CurrentTask = task;
+        BuildTaskPath();
         StartCoroutine(ExecuteTask());
     }
 
@@ -46,12 +49,34 @@ public class Employee : MonoBehaviour
     {
         while (CurrentTask != null && CurrentTask.CurrentActionIndex < CurrentTask.Actions.Count)
         {
-            var goal = CurrentTask.Goals.FirstOrDefault(g => g.Preconditions.All(p => State.ContainsKey(p.Key) && State[p.Key] == p.Value));
-            if (goal == null)
+            // Check if the current destination is still valid
+            if (CurrentTask.TravelLocations != null && currentLocationIndex < CurrentTask.TravelLocations.Count)
             {
-                Debug.LogError("No goal found that matches current state.");
-                CurrentTask = null;
-                yield break;
+                Transform currentDestination = CurrentTask.TravelLocations[currentLocationIndex];
+
+                // Validate the destination (e.g., check if storage is full)
+                if (!IsDestinationValid(currentDestination))
+                {
+                    // Recalculate the path or choose a new destination
+                    currentDestination = RecalculateDestination();
+                    if (currentDestination == null)
+                    {
+                        // Handle the case where no valid destination is found
+                        Debug.LogWarning("No valid destination found.");
+                        break;
+                    }
+                }
+
+                // Set the agent's destination
+                agent.SetDestination(currentDestination.position);
+
+                // Wait until the employee reaches the destination
+                while (agent.remainingDistance > agent.stoppingDistance)
+                {
+                    yield return null;
+                }
+
+                currentLocationIndex++; // Move to the next location
             }
 
             var action = CurrentTask.Actions[CurrentTask.CurrentActionIndex];
@@ -66,16 +91,6 @@ public class Employee : MonoBehaviour
 
                     CurrentTask.IncrementActionIndex();
 
-                    if (goal.IsAchieved(State))
-                    {
-                        Debug.Log("Goal achieved: " + goal.GoalName);
-                        CurrentTask.CompleteTask();
-                        TaskManager.Instance.UpdateTaskState(CurrentTask);
-                        CurrentTask = null;
-                        TaskManager.Instance.AssignTasks();
-                        yield break;
-                    }
-
                     // Wait for a frame to ensure other systems can update
                     yield return null;
                 }
@@ -84,6 +99,15 @@ public class Employee : MonoBehaviour
             // Wait for a frame to ensure other systems can update
             yield return null;
         }
+
+        CurrentTask = null;
+    }
+
+    private void BuildTaskPath()
+    {
+        if (CurrentTask == null) return;
+
+
     }
 
     public bool ReserveForklift()
@@ -121,8 +145,44 @@ public class Employee : MonoBehaviour
     public bool PlaceInReceiving()
     {
         // Logic to place pallet in receiving area
-        Debug.Log("Pallet Placed in Receiving");
-        State["PalletInReceiving"] = true;
-        return true;
+        bool added = inventoryManager.AddMaterialsToStorage(StorageArea.StorageType.Receiving, 1);
+        if (added)
+        {
+            Debug.Log("Pallet Placed in Receiving");
+            State["PalletInReceiving"] = true;
+            return true;
+        }
+        else
+        {
+            Debug.Log("Receiving area is full.");
+            return false;
+        }
+    }
+
+    private bool IsDestinationValid(Transform destination)
+    {
+        // Example: Check if the storage area is full
+        // This can be extended to include other validation logic as needed
+        if (destination.CompareTag("ReceivingArea"))
+        {
+            var storageArea = destination.GetComponent<StorageArea>();
+            return storageArea != null && storageArea.AvailableCapacity() > 0;
+        }
+        return true; // If no specific validation needed, return true
+    }
+
+    private Transform RecalculateDestination()
+    {
+        // Logic to find a new valid destination
+        // Example: Find a storage area with available capacity
+        foreach (var area in inventoryManager.ReceivingAreas)
+        {
+            if (area.AvailableCapacity() > 0)
+            {
+                return area.transform;
+            }
+        }
+        // Return null if no valid destination is found
+        return null;
     }
 }

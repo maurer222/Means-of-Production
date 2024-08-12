@@ -71,7 +71,7 @@ public class PurchasingManager : MonoBehaviour
                 1.0f, employee => employee.PlaceInReceiving())
         };
 
-        Task unloadingTask = new Task(numPallets, goals, actions);
+        Task unloadingTask = new Task(2, goals, actions, 2);
         unloadingTask.Priority = 10;
         taskManager.AddTask(unloadingTask);
     }   
