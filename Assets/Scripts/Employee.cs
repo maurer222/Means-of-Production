@@ -11,6 +11,7 @@ public class Employee : MonoBehaviour
     public List<Goal> Goals { get; set; }
     public List<Action> Actions { get; set; }
     public Dictionary<string, bool> State { get; set; }
+    public Equipment Equipment { get; set; }
     public bool IsAvailable => CurrentTask == null;
 
     public Task CurrentTask;
@@ -44,6 +45,7 @@ public class Employee : MonoBehaviour
         BuildTaskPath();
         StartCoroutine(ExecuteTask());
     }
+
 
     private IEnumerator ExecuteTask()
     {
@@ -112,9 +114,52 @@ public class Employee : MonoBehaviour
 
     public bool ReserveForklift()
     {
+        if (Equipment == null) Equipment = EquipmentManager.Instance.GetAvailableEquipment<Forklift>();
+
+        if (Equipment != null)
+        {
+            agent.SetDestination(Equipment.Location.position);
+            State["ForkliftReserved"] = true;
+            return true;
+        }
+        return false;
+    }
+
+    public bool ReservePalletJack()
+    {
+        if (Equipment == null) Equipment = EquipmentManager.Instance.GetAvailableEquipment<PalletJack>();
+
+        if (Equipment != null)
+        {
+            agent.SetDestination(Equipment.Location.position);
+            State["ForkliftReserved"] = true;
+            return true;
+        }
+        return false;
+    }
+
+    public bool ReserveEquipment()
+    {
+        if (Equipment == null)
+        {
+            Equipment = EquipmentManager.Instance.GetAvailableEquipment();
+        }
+
+        if (Equipment != null)
+        {
+            // Logic for moving to the equipment’s location
+            agent.SetDestination(Equipment.Location.position);
+            State["EquipmentReserved"] = true;
+            return true;
+        }
+        return false;
+    }
+
+    public bool GetForklift()
+    {
         // Logic to reserve a forklift
-        Debug.Log("Forklift Reserved");
-        State["ForkliftReserved"] = true;
+        Debug.Log("Forklift Retreived");
+        State["AtForklift"] = true;
         return true;
     }
 

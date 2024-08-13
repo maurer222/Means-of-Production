@@ -45,30 +45,41 @@ public class PurchasingManager : MonoBehaviour
 
         var actions = new List<Action>
         {
-            new Action("ReserveForklift",
+            new Action("ReserveEquipment",
                 new Dictionary<string, bool> { { "EquipmentAvailable", true } },
-                new Dictionary<string, bool> { { "ForkliftReserved", true } },
-                1.0f, employee => employee.ReserveForklift()),
+                new Dictionary<string, bool> { { "EquipmentReserved", true } },
+                1.0f, 
+                employee => employee.ReserveForklift()),
+
+            new Action("GetEquipment",
+                new Dictionary<string, bool> { { "EquipmentReserved", true } },
+                new Dictionary<string, bool> { { "AtForklift", true } },
+                1.0f, 
+                employee => employee.GetForklift()),
 
             new Action("MoveToTruck",
-                new Dictionary<string, bool> { { "ForkliftReserved", true } },
+                new Dictionary<string, bool> { { "EquipmentReserved", true } },
                 new Dictionary<string, bool> { { "AtTruck", true } },
-                1.0f, employee => employee.MoveToTruck()),
+                1.0f, 
+                employee => employee.MoveToTruck()),
 
             new Action("PickUpPallet",
                 new Dictionary<string, bool> { { "AtTruck", true } },
                 new Dictionary<string, bool> { { "PalletPicked", true } },
-                1.0f, employee => employee.PickUpPallet()),
+                1.0f, 
+                employee => employee.PickUpPallet()),
 
             new Action("MoveToReceiving",
                 new Dictionary<string, bool> { { "PalletPicked", true } },
                 new Dictionary<string, bool> { { "AtReceiving", true } },
-                1.0f, employee => employee.MoveToReceiving()),
+                1.0f, 
+                employee => employee.MoveToReceiving()),
 
             new Action("PlaceInReceiving",
                 new Dictionary<string, bool> { { "AtReceiving", true } },
                 new Dictionary<string, bool> { { "PalletInReceiving", true } },
-                1.0f, employee => employee.PlaceInReceiving())
+                1.0f, 
+                employee => employee.PlaceInReceiving())
         };
 
         Task unloadingTask = new Task(2, goals, actions, 2);
