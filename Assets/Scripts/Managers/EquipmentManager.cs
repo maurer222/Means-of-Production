@@ -18,6 +18,8 @@ public class EquipmentManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        allEquipment.Add(new Forklift("Forklift1", this.transform, 1));
     }
 
     public void RegisterEquipment(Equipment equipment)
